@@ -20,4 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      product:
+        title: "Product title"
+        description: "Product description"
+        image_url: "Product image"
+        price: "Product price"
+    errors:
+      models:
+        product:
+          attributes:
+            title:
+              blank: "please give your product a title"
+            image_url:
+              blank: "Must upload an image"
