@@ -8,4 +8,8 @@ class Product < ActiveRecord::Base
   }
   validates_length_of :title, :minimum => 10, :maximum => 50, :allow_blank => true
 
+
+  def self.latest
+    Product.order(:updated_at).last
+  end
 end
