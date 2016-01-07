@@ -33,5 +33,5 @@ price: 100.95
 Product.create!(title: 'Programming Ruby 2.0',
   description: %{<p>Ruby is the fastest growing and most exciting dynamic language out there. If you need to get working programs delivered fast, you should add Ruby to your toolbox.</p>},
   price: 500.50,
-  image_url: 'ruby.png'
+  image_url: 'http://i.telegraph.co.uk/multimedia/archive/03387/iPhone_7_Nickolay__3387906k.jpg',
   )
