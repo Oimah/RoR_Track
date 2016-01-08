@@ -27,7 +27,7 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    @line_item = @cart.add_product(product.id)
     #@line_item = LineItem.new(line_item_params)
 
     respond_to do |format|
@@ -60,24 +60,33 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to request.referer, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
-
+  def total_price
+    product.price * quantity
+  end
+  
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def line_item_params
+    params.require(:line_item).permit(:product_id, :cart_id)
+  end
 
-    #reset store controller access count to 0 if item is added to the cart
-    def reset_access_count
-      session[:counter] = 0
-    end
+  #reset store controller access count to 0 if item is added to the cart
+  def reset_access_count
+    session[:counter] = 0
+  end
+
+  def line_item_params
+    params.require(:line_item).permit(:product_id)
+  end
+
+  
 end
